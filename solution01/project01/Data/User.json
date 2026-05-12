@@ -1,0 +1,84 @@
+[
+  {
+    "Id": 1,
+    "Username": "Ali",
+    "Password": "1234",
+    "FavoriteGenres": ["Sci-Fi", "Action"],
+    "WatchHistory": [1, 2, 3],
+    "Ratings": [1, 2, 3]
+  },
+  {
+    "Id": 2,
+    "Username": "Sara",
+    "Password": "5678",
+    "FavoriteGenres": ["Romance", "Drama"],
+    "WatchHistory": [4, 7],
+    "Ratings": [4, 5]
+  },
+  {
+    "Id": 3,
+    "Username": "Ahmed",
+    "Password": "9999",
+    "FavoriteGenres": ["Action", "Horror"],
+    "WatchHistory": [3, 5, 9],
+    "Ratings": [6, 7, 8]
+  },
+
+  {
+    "Id": 4,
+    "Username": "Mariam",
+    "Password": "1111",
+    "FavoriteGenres": ["Animation", "Family"],
+    "WatchHistory": [10, 18, 19],
+    "Ratings": [1, 5, 10]
+  },
+  {
+    "Id": 5,
+    "Username": "Omar",
+    "Password": "2222",
+    "FavoriteGenres": ["Sci-Fi", "Thriller"],
+    "WatchHistory": [2, 6, 28],
+    "Ratings": [2, 6, 28]
+  },
+  {
+    "Id": 6,
+    "Username": "Lina",
+    "Password": "3333",
+    "FavoriteGenres": ["Drama", "Romance"],
+    "WatchHistory": [4, 12, 46],
+    "Ratings": [4, 12, 46]
+  },
+  {
+    "Id": 7,
+    "Username": "Yousef",
+    "Password": "4444",
+    "FavoriteGenres": ["Action", "Adventure"],
+    "WatchHistory": [5, 8, 17],
+    "Ratings": [5, 8, 17]
+  },
+  {
+    "Id": 8,
+    "Username": "Noura",
+    "Password": "5555",
+    "FavoriteGenres": ["Horror", "Thriller"],
+    "WatchHistory": [9, 20, 45],
+    "Ratings": [9, 20, 45]
+  },
+  {
+    "Id": 9,
+    "Username": "Hassan",
+    "Password": "6666",
+    "FavoriteGenres": ["Action", "Sci-Fi"],
+    "WatchHistory": [1, 6, 43],
+    "Ratings": [1, 6, 43]
+  },
+  {
+    "Id": 10,
+    "Username": "Fatima",
+    "Password": "7777",
+    "FavoriteGenres": ["Romance", "Drama", "Comedy"],
+    "WatchHistory": [4, 16, 50],
+    "Ratings": [4, 16, 50]
+  }
+
+]
