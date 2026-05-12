@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace project01.Models
+﻿namespace MovieRecommendationSystem.Models
 {
-    internal class Admin
+    public class Admin : User
     {
+        public string AdminRole { get; set; }
+
+        public bool CanManageMovies { get; set; }
+
+        public bool CanManageUsers { get; set; }
+
+        public Admin()
+        {
+            CanManageMovies = true;
+            CanManageUsers = true;
+        }
     }
 }

@@ -1,12 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
-namespace project01.Models
+using System;
+
+namespace MovieRecommendationSystem.Models
 {
-    internal class Rating
+    public class Rating
     {
+        private int score;
+
+        public int Id { get; set; }
+
+        public int UserId { get; set; }
+
+        public int MovieId { get; set; }
+
+        public int Score
+        {
+            get { return score; }
+            set
+            {
+                if (value >= 1 && value <= 5)
+                    score = value;
+            }
+        }
+
+        public DateTime RatedAt { get; set; }
+
+        public Rating()
+        {
+            RatedAt = DateTime.Now;
+        }
     }
 }
