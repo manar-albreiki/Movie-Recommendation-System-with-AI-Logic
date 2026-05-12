@@ -3,9 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\maaa7\\OneDrive\\Desktop\\Movie-Recommendation-System-with-AI-Logic\\solution01\\",
   "Documents": [
     {
-<<<<<<< HEAD
+      "AbsoluteMoniker": "D:0:0:{C9D6A0C5-5CFE-1966-563C-1AF6FDF81136}|project01\\project01.csproj|c:\\users\\maaa7\\onedrive\\desktop\\movie-recommendation-system-with-ai-logic\\solution01\\project01\\recommendation\\collaborativefilteringservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C9D6A0C5-5CFE-1966-563C-1AF6FDF81136}|project01\\project01.csproj|solutionrelative:project01\\recommendation\\collaborativefilteringservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C9D6A0C5-5CFE-1966-563C-1AF6FDF81136}|project01\\project01.csproj|c:\\users\\maaa7\\onedrive\\desktop\\movie-recommendation-system-with-ai-logic\\solution01\\project01\\recommendation\\contentbasedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C9D6A0C5-5CFE-1966-563C-1AF6FDF81136}|project01\\project01.csproj|solutionrelative:project01\\recommendation\\contentbasedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C9D6A0C5-5CFE-1966-563C-1AF6FDF81136}|project01\\project01.csproj|c:\\users\\maaa7\\onedrive\\desktop\\movie-recommendation-system-with-ai-logic\\solution01\\project01\\recommendation\\recommendationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C9D6A0C5-5CFE-1966-563C-1AF6FDF81136}|project01\\project01.csproj|solutionrelative:project01\\recommendation\\recommendationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C9D6A0C5-5CFE-1966-563C-1AF6FDF81136}|project01\\project01.csproj|c:\\users\\maaa7\\onedrive\\desktop\\movie-recommendation-system-with-ai-logic\\solution01\\project01\\movies\\movieservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C9D6A0C5-5CFE-1966-563C-1AF6FDF81136}|project01\\project01.csproj|solutionrelative:project01\\movies\\movieservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C9D6A0C5-5CFE-1966-563C-1AF6FDF81136}|project01\\project01.csproj|c:\\users\\maaa7\\onedrive\\desktop\\movie-recommendation-system-with-ai-logic\\solution01\\project01\\ratings\\ratingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C9D6A0C5-5CFE-1966-563C-1AF6FDF81136}|project01\\project01.csproj|solutionrelative:project01\\ratings\\ratingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C9D6A0C5-5CFE-1966-563C-1AF6FDF81136}|project01\\project01.csproj|c:\\users\\maaa7\\onedrive\\desktop\\movie-recommendation-system-with-ai-logic\\solution01\\project01\\search\\searchservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -22,10 +37,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{C9D6A0C5-5CFE-1966-563C-1AF6FDF81136}|project01\\project01.csproj|c:\\users\\maaa7\\onedrive\\desktop\\movie-recommendation-system-with-ai-logic\\solution01\\project01\\models\\rating.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C9D6A0C5-5CFE-1966-563C-1AF6FDF81136}|project01\\project01.csproj|solutionrelative:project01\\models\\rating.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-=======
-      "AbsoluteMoniker": "D:0:0:{C9D6A0C5-5CFE-1966-563C-1AF6FDF81136}|project01\\project01.csproj|c:\\users\\maaa7\\onedrive\\desktop\\movie-recommendation-system-with-ai-logic\\solution01\\project01\\services\\authentication\\authenticationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C9D6A0C5-5CFE-1966-563C-1AF6FDF81136}|project01\\project01.csproj|solutionrelative:project01\\services\\authentication\\authenticationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
->>>>>>> 0574d044acc9f2b45d644184761f6e1e5282b53c
     },
     {
       "AbsoluteMoniker": "D:0:0:{C9D6A0C5-5CFE-1966-563C-1AF6FDF81136}|project01\\project01.csproj|c:\\users\\maaa7\\onedrive\\desktop\\movie-recommendation-system-with-ai-logic\\solution01\\project01\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -51,62 +62,71 @@
           "Children": [
             {
               "$type": "Document",
-<<<<<<< HEAD
-              "DocumentIndex": 1,
-              "Title": "SearchService.cs",
-              "DocumentMoniker": "C:\\Users\\maaa7\\OneDrive\\Desktop\\Movie-Recommendation-System-with-AI-Logic\\solution01\\project01\\Search\\SearchService.cs",
-              "RelativeDocumentMoniker": "project01\\Search\\SearchService.cs",
-              "ToolTip": "C:\\Users\\maaa7\\OneDrive\\Desktop\\Movie-Recommendation-System-with-AI-Logic\\solution01\\project01\\Search\\SearchService.cs",
-              "RelativeToolTip": "project01\\Search\\SearchService.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAgwG4AAAABAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "CollaborativeFilteringService.cs",
+              "DocumentMoniker": "C:\\Users\\maaa7\\OneDrive\\Desktop\\Movie-Recommendation-System-with-AI-Logic\\solution01\\project01\\Recommendation\\CollaborativeFilteringService.cs",
+              "RelativeDocumentMoniker": "project01\\Recommendation\\CollaborativeFilteringService.cs",
+              "ToolTip": "C:\\Users\\maaa7\\OneDrive\\Desktop\\Movie-Recommendation-System-with-AI-Logic\\solution01\\project01\\Recommendation\\CollaborativeFilteringService.cs",
+              "RelativeToolTip": "project01\\Recommendation\\CollaborativeFilteringService.cs",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAAAEgAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-12T11:10:16.223Z",
+              "WhenOpened": "2026-05-12T11:56:25.907Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ContentBasedService.cs",
+              "DocumentMoniker": "C:\\Users\\maaa7\\OneDrive\\Desktop\\Movie-Recommendation-System-with-AI-Logic\\solution01\\project01\\Recommendation\\ContentBasedService.cs",
+              "RelativeDocumentMoniker": "project01\\Recommendation\\ContentBasedService.cs",
+              "ToolTip": "C:\\Users\\maaa7\\OneDrive\\Desktop\\Movie-Recommendation-System-with-AI-Logic\\solution01\\project01\\Recommendation\\ContentBasedService.cs",
+              "RelativeToolTip": "project01\\Recommendation\\ContentBasedService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-12T11:56:01.162Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "project01",
+              "Title": "RecommendationService.cs",
+              "DocumentMoniker": "C:\\Users\\maaa7\\OneDrive\\Desktop\\Movie-Recommendation-System-with-AI-Logic\\solution01\\project01\\Recommendation\\RecommendationService.cs",
+              "RelativeDocumentMoniker": "project01\\Recommendation\\RecommendationService.cs",
+              "ToolTip": "C:\\Users\\maaa7\\OneDrive\\Desktop\\Movie-Recommendation-System-with-AI-Logic\\solution01\\project01\\Recommendation\\RecommendationService.cs",
+              "RelativeToolTip": "project01\\Recommendation\\RecommendationService.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAIwC4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-12T11:55:40.078Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "RatingService.cs",
+              "DocumentMoniker": "C:\\Users\\maaa7\\OneDrive\\Desktop\\Movie-Recommendation-System-with-AI-Logic\\solution01\\project01\\Ratings\\RatingService.cs",
+              "RelativeDocumentMoniker": "project01\\Ratings\\RatingService.cs",
+              "ToolTip": "C:\\Users\\maaa7\\OneDrive\\Desktop\\Movie-Recommendation-System-with-AI-Logic\\solution01\\project01\\Ratings\\RatingService.cs",
+              "RelativeToolTip": "project01\\Ratings\\RatingService.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAAowIcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-12T11:53:03.876Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "project01.csproj",
               "DocumentMoniker": "C:\\Users\\maaa7\\OneDrive\\Desktop\\Movie-Recommendation-System-with-AI-Logic\\solution01\\project01\\project01.csproj",
               "RelativeDocumentMoniker": "project01\\project01.csproj",
               "ToolTip": "C:\\Users\\maaa7\\OneDrive\\Desktop\\Movie-Recommendation-System-with-AI-Logic\\solution01\\project01\\project01.csproj",
               "RelativeToolTip": "project01\\project01.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-05-12T11:09:52.176Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-12T11:45:46.728Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-=======
-              "DocumentIndex": 0,
-              "Title": "AuthenticationService.cs",
-              "DocumentMoniker": "C:\\Users\\maaa7\\OneDrive\\Desktop\\Movie-Recommendation-System-with-AI-Logic\\solution01\\project01\\Services\\Authentication\\AuthenticationService.cs",
-              "RelativeDocumentMoniker": "project01\\Services\\Authentication\\AuthenticationService.cs",
-              "ToolTip": "C:\\Users\\maaa7\\OneDrive\\Desktop\\Movie-Recommendation-System-with-AI-Logic\\solution01\\project01\\Services\\Authentication\\AuthenticationService.cs",
-              "RelativeToolTip": "project01\\Services\\Authentication\\AuthenticationService.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAAAowD0AAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-12T10:32:47.056Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Admin.cs",
-              "DocumentMoniker": "C:\\Users\\maaa7\\OneDrive\\Desktop\\Movie-Recommendation-System-with-AI-Logic\\solution01\\project01\\Models\\Admin.cs",
-              "RelativeDocumentMoniker": "project01\\Models\\Admin.cs",
-              "ToolTip": "C:\\Users\\maaa7\\OneDrive\\Desktop\\Movie-Recommendation-System-with-AI-Logic\\solution01\\project01\\Models\\Admin.cs",
-              "RelativeToolTip": "project01\\Models\\Admin.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-12T10:08:42.315Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
->>>>>>> 0574d044acc9f2b45d644184761f6e1e5282b53c
+              "DocumentIndex": 8,
               "Title": "Rating.cs",
               "DocumentMoniker": "C:\\Users\\maaa7\\OneDrive\\Desktop\\Movie-Recommendation-System-with-AI-Logic\\solution01\\project01\\Models\\Rating.cs",
               "RelativeDocumentMoniker": "project01\\Models\\Rating.cs",
@@ -114,12 +134,11 @@
               "RelativeToolTip": "project01\\Models\\Rating.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-12T10:08:27.464Z"
+              "WhenOpened": "2026-05-12T11:45:46.76Z"
             },
             {
               "$type": "Document",
-<<<<<<< HEAD
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "MovieService.cs",
               "DocumentMoniker": "C:\\Users\\maaa7\\OneDrive\\Desktop\\Movie-Recommendation-System-with-AI-Logic\\solution01\\project01\\Movies\\MovieService.cs",
               "RelativeDocumentMoniker": "project01\\Movies\\MovieService.cs",
@@ -127,12 +146,24 @@
               "RelativeToolTip": "project01\\Movies\\MovieService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAIEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-12T11:03:13.525Z",
+              "WhenOpened": "2026-05-12T11:45:46.765Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
+              "Title": "SearchService.cs",
+              "DocumentMoniker": "C:\\Users\\maaa7\\OneDrive\\Desktop\\Movie-Recommendation-System-with-AI-Logic\\solution01\\project01\\Search\\SearchService.cs",
+              "RelativeDocumentMoniker": "project01\\Search\\SearchService.cs",
+              "ToolTip": "C:\\Users\\maaa7\\OneDrive\\Desktop\\Movie-Recommendation-System-with-AI-Logic\\solution01\\project01\\Search\\SearchService.cs",
+              "RelativeToolTip": "project01\\Search\\SearchService.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAgwG4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-12T11:45:46.705Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\maaa7\\OneDrive\\Desktop\\Movie-Recommendation-System-with-AI-Logic\\solution01\\project01\\Models\\User.cs",
               "RelativeDocumentMoniker": "project01\\Models\\User.cs",
@@ -140,15 +171,11 @@
               "RelativeToolTip": "project01\\Models\\User.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-12T10:07:49.052Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-12T11:45:46.768Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-=======
-              "DocumentIndex": 4,
->>>>>>> 0574d044acc9f2b45d644184761f6e1e5282b53c
+              "DocumentIndex": 11,
               "Title": "Movie.cs",
               "DocumentMoniker": "C:\\Users\\maaa7\\OneDrive\\Desktop\\Movie-Recommendation-System-with-AI-Logic\\solution01\\project01\\Models\\Movie.cs",
               "RelativeDocumentMoniker": "project01\\Models\\Movie.cs",
@@ -156,28 +183,11 @@
               "RelativeToolTip": "project01\\Models\\Movie.cs",
               "ViewState": "AgIAABMAAAAAAAAAAAA0wCUAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-12T10:08:11.974Z"
+              "WhenOpened": "2026-05-12T11:45:46.774Z"
             },
             {
               "$type": "Document",
-<<<<<<< HEAD
-              "DocumentIndex": 3,
-=======
-              "DocumentIndex": 1,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\maaa7\\OneDrive\\Desktop\\Movie-Recommendation-System-with-AI-Logic\\solution01\\project01\\Models\\User.cs",
-              "RelativeDocumentMoniker": "project01\\Models\\User.cs",
-              "ToolTip": "C:\\Users\\maaa7\\OneDrive\\Desktop\\Movie-Recommendation-System-with-AI-Logic\\solution01\\project01\\Models\\User.cs",
-              "RelativeToolTip": "project01\\Models\\User.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAqwBAAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-12T10:07:49.052Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
->>>>>>> 0574d044acc9f2b45d644184761f6e1e5282b53c
+              "DocumentIndex": 7,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\maaa7\\OneDrive\\Desktop\\Movie-Recommendation-System-with-AI-Logic\\solution01\\project01\\Program.cs",
               "RelativeDocumentMoniker": "project01\\Program.cs",
@@ -185,12 +195,11 @@
               "RelativeToolTip": "project01\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-12T10:05:54.245Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-12T11:45:46.776Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 10,
               "Title": "Admin.cs",
               "DocumentMoniker": "C:\\Users\\maaa7\\OneDrive\\Desktop\\Movie-Recommendation-System-with-AI-Logic\\solution01\\project01\\Models\\Admin.cs",
               "RelativeDocumentMoniker": "project01\\Models\\Admin.cs",
@@ -198,7 +207,7 @@
               "RelativeToolTip": "project01\\Models\\Admin.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-12T10:08:42.315Z"
+              "WhenOpened": "2026-05-12T11:45:46.78Z"
             }
           ]
         }
