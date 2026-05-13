@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "MX01bO0KmyM=",
+  "dgSpecHash": "xPM9R36G5TQ=",
   "success": true,
   "projectFilePath": "C:\\Users\\maaa7\\OneDrive\\Desktop\\Movie-Recommendation-System-with-AI-Logic\\solution01\\project01\\project01.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\maaa7\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.27\\microsoft.windowsdesktop.app.ref.8.0.27.nupkg.sha512",
+    "C:\\Users\\maaa7\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.27\\microsoft.netcore.app.ref.8.0.27.nupkg.sha512",
+    "C:\\Users\\maaa7\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.27\\microsoft.aspnetcore.app.ref.8.0.27.nupkg.sha512",
+    "C:\\Users\\maaa7\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.27\\microsoft.netcore.app.host.win-x64.8.0.27.nupkg.sha512"
+  ],
   "logs": []
 }
