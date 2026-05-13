@@ -1,6 +1,4 @@
-﻿// RecommendationEngine.cs
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using MovieRecommendationSystem.Models;
@@ -18,99 +16,66 @@ namespace MovieRecommendationSystem.AI
         private string ratingFile = "Data/Rating.json";
         private string userFile = "Data/User.json";
 
+        // =========================================
         // Constructor
+        // =========================================
         public RecommendationEngine()
         {
-            // Load data from JSON files
             movies = FileManager.LoadData<Movie>(movieFile);
             ratings = FileManager.LoadData<Rating>(ratingFile);
             users = FileManager.LoadData<User>(userFile);
         }
 
         // =========================================
-        // Main AI Recommendation Method
+        // MAIN AI RECOMMENDATION METHOD
         // =========================================
         public List<Movie> GenerateRecommendations(User currentUser)
         {
-            // Store movie scores
-            Dictionary<Movie, double> recommendationScores =
-                new Dictionary<Movie, double>();
+            // reload latest data
+            movies = FileManager.LoadData<Movie>(movieFile);
+            ratings = FileManager.LoadData<Rating>(ratingFile);
+            users = FileManager.LoadData<User>(userFile);
+
+            List<Movie> recommendedMovies = new List<Movie>();
 
             foreach (var movie in movies)
             {
-                double score = 0;
+                double contentScore = CalculateContentScore(currentUser, movie);
 
-                // ---------------------------------
-                // Genre Matching Score
-                // ---------------------------------
-                if (currentUser.FavoriteGenres.Any(g =>
-                    movie.Genre.ToLower().Contains(g.ToLower())))
-                {
-                    score += 3;
-                }
+                double collaborativeScore =
+                    CalculateCollaborativeScore(currentUser, movie);
 
-                // ---------------------------------
-                // Movie Rating Score
-                // ---------------------------------
-                score += movie.Rating;
+                double finalScore =
+                    (contentScore * 0.6) +
+                    (collaborativeScore * 0.4);
 
-                // ---------------------------------
-                // Collaborative Filtering Score
-                // ---------------------------------
-                score += GetCollaborativeScore(currentUser, movie);
+                // IMPORTANT FIX
+                movie.Rating = finalScore;
 
-                // Save score
-                recommendationScores[movie] = score;
+                recommendedMovies.Add(movie);
             }
 
-            // Sort movies by score descending
-            return recommendationScores
-                .OrderByDescending(m => m.Value)
-                .Select(m => m.Key)
+            return recommendedMovies
+                .OrderByDescending(m => m.Rating)
                 .Take(10)
                 .ToList();
         }
 
         // =========================================
-        // Collaborative Filtering Logic
+        // CONTENT-BASED FILTERING
         // =========================================
-        private double GetCollaborativeScore(User currentUser, Movie movie)
+        private double CalculateContentScore(User user, Movie movie)
         {
             double score = 0;
 
-            // Current user ratings
-            var currentUserRatings = ratings
-                .Where(r => r.UserId == currentUser.Id)
-                .ToList();
-
-            foreach (var otherUser in users)
+            if (user.FavoriteGenres != null)
             {
-                // Skip same user
-                if (otherUser.Id == currentUser.Id)
-                    continue;
-
-                // Other user ratings
-                var otherUserRatings = ratings
-                    .Where(r => r.UserId == otherUser.Id)
-                    .ToList();
-
-                // Count similar rated movies
-                int similarity = currentUserRatings
-                    .Count(cr => otherUserRatings
-                        .Any(or =>
-                            or.MovieId == cr.MovieId &&
-                            Math.Abs(or.Score - cr.Score) <= 1));
-
-                // If users are similar
-                if (similarity >= 2)
+                foreach (var genre in user.FavoriteGenres)
                 {
-                    // Check if similar user liked this movie
-                    bool likedMovie = otherUserRatings
-                        .Any(r => r.MovieId == movie.Id && r.Score >= 4);
-
-                    if (likedMovie)
+                    if (movie.Genre.ToLower()
+                        .Contains(genre.ToLower()))
                     {
-                        score += 2;
+                        score += 3;
                     }
                 }
             }
@@ -119,32 +84,24 @@ namespace MovieRecommendationSystem.AI
         }
 
         // =========================================
-        // Cosine Similarity
+        // COLLABORATIVE FILTERING
         // =========================================
-        public double CalculateCosineSimilarity(
-            List<double> vectorA,
-            List<double> vectorB)
+        private double CalculateCollaborativeScore(
+            User currentUser,
+            Movie movie)
         {
-            double dotProduct = 0;
-            double magnitudeA = 0;
-            double magnitudeB = 0;
+            double score = 0;
 
-            for (int i = 0; i < vectorA.Count; i++)
+            var movieRatings = ratings
+                .Where(r => r.MovieId == movie.Id)
+                .ToList();
+
+            if (movieRatings.Count > 0)
             {
-                dotProduct += vectorA[i] * vectorB[i];
-
-                magnitudeA += Math.Pow(vectorA[i], 2);
-
-                magnitudeB += Math.Pow(vectorB[i], 2);
+                score = movieRatings.Average(r => r.Score);
             }
 
-            magnitudeA = Math.Sqrt(magnitudeA);
-            magnitudeB = Math.Sqrt(magnitudeB);
-
-            if (magnitudeA == 0 || magnitudeB == 0)
-                return 0;
-
-            return dotProduct / (magnitudeA * magnitudeB);
+            return score;
         }
     }
 }

@@ -17,7 +17,6 @@ namespace MovieRecommendationSystem.Services.Ratings
         // Constructor
         public RatingService()
         {
-            // Load ratings and movies from JSON files
             ratings = FileManager.LoadData<Rating>(ratingFile);
             movies = FileManager.LoadData<Movie>(movieFile);
         }
@@ -27,21 +26,47 @@ namespace MovieRecommendationSystem.Services.Ratings
         // =========================================
         public void AddOrUpdateRating(int userId, int movieId, int score)
         {
-            // Check if the user already rated this movie
+            // =========================================
+            // VALIDATE SCORE (1 to 5)
+            // =========================================
+            if (score < 1 || score > 5)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("❌ Rating must be between 1 and 5 only!");
+                Console.ResetColor();
+                return;
+            }
+
+            // =========================================
+            // VALIDATE MOVIE ID (EXISTS IN JSON)
+            // =========================================
+            bool movieExists = movies.Any(m => m.Id == movieId);
+
+            if (!movieExists)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("❌ Invalid Movie ID! Please enter a valid movie number.");
+                Console.ResetColor();
+                return;
+            }
+
+            // =========================================
+            // CHECK EXISTING RATING
+            // =========================================
             Rating existingRating = ratings
                 .FirstOrDefault(r => r.UserId == userId && r.MovieId == movieId);
 
             if (existingRating != null)
             {
-                // Update existing rating
                 existingRating.Score = score;
                 existingRating.RatedAt = DateTime.Now;
 
-                Console.WriteLine("Rating updated successfully.");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("✔ Rating updated successfully.");
+                Console.ResetColor();
             }
             else
             {
-                // Create new rating
                 Rating newRating = new Rating
                 {
                     Id = ratings.Count > 0 ? ratings.Max(r => r.Id) + 1 : 1,
@@ -53,13 +78,13 @@ namespace MovieRecommendationSystem.Services.Ratings
 
                 ratings.Add(newRating);
 
-                Console.WriteLine("Rating added successfully.");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("✔ Rating added successfully.");
+                Console.ResetColor();
             }
 
-            // Save updated ratings to JSON
             FileManager.SaveData(ratingFile, ratings);
 
-            // Update movie average rating
             UpdateMovieRating(movieId);
         }
 
@@ -68,26 +93,25 @@ namespace MovieRecommendationSystem.Services.Ratings
         // =========================================
         public void RemoveRating(int userId, int movieId)
         {
-            // Find rating by user and movie
             var rating = ratings
                 .FirstOrDefault(r => r.UserId == userId && r.MovieId == movieId);
 
             if (rating == null)
             {
-                Console.WriteLine("Rating not found.");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("❌ Rating not found.");
+                Console.ResetColor();
                 return;
             }
 
-            // Remove rating from list
             ratings.Remove(rating);
-
-            // Save changes to JSON
             FileManager.SaveData(ratingFile, ratings);
 
-            // Update movie rating after removal
             UpdateMovieRating(movieId);
 
-            Console.WriteLine("Rating removed successfully.");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("✔ Rating removed successfully.");
+            Console.ResetColor();
         }
 
         // =========================================
@@ -95,41 +119,34 @@ namespace MovieRecommendationSystem.Services.Ratings
         // =========================================
         public List<Rating> GetMovieRatings(int movieId)
         {
-            // Return all ratings for a specific movie
             return ratings.Where(r => r.MovieId == movieId).ToList();
         }
 
         // =========================================
-        // Calculate Average Rating
+        // Get Average Rating
         // =========================================
         public double GetAverageRating(int movieId)
         {
-            // Get all ratings for the movie
             var movieRatings = ratings.Where(r => r.MovieId == movieId);
 
-            // If no ratings exist, return 0
             if (!movieRatings.Any())
                 return 0;
 
-            // Calculate average score
             return movieRatings.Average(r => r.Score);
         }
 
         // =========================================
-        // Update Movie Rating in Movie JSON
+        // Update Movie Rating
         // =========================================
         private void UpdateMovieRating(int movieId)
         {
-            // Find the movie
             Movie movie = movies.FirstOrDefault(m => m.Id == movieId);
 
             if (movie == null)
                 return;
 
-            // Update movie rating with average rating
             movie.Rating = GetAverageRating(movieId);
 
-            // Save updated movies to JSON
             FileManager.SaveData(movieFile, movies);
         }
     }

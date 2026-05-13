@@ -1,0 +1,516 @@
+
+
+
+[
+  {
+    "Id": 1,
+    "Title": "Interstellar",
+    "Genre": "Sci-Fi",
+    "Description": "A team travels through a wormhole to save humanity.",
+    "ReleaseYear": 2014,
+    "Rating": 8.7,
+    "Director": "Christopher Nolan",
+    "Cast": ["Matthew McConaughey", "Anne Hathaway"],
+    "Tags": ["Space", "Future", "Adventure"]
+  },
+  {
+    "Id": 2,
+    "Title": "Inception",
+    "Genre": "Sci-Fi",
+    "Description": "A thief enters dreams to steal secrets.",
+    "ReleaseYear": 2010,
+    "Rating": 8.8,
+    "Director": "Christopher Nolan",
+    "Cast": ["Leonardo DiCaprio", "Tom Hardy"],
+    "Tags": ["Dream", "Mind", "Action"]
+  },
+  {
+    "Id": 3,
+    "Title": "The Dark Knight",
+    "Genre": "Action",
+    "Description": "Batman faces the Joker in Gotham City.",
+    "ReleaseYear": 2008,
+    "Rating": 9.0,
+    "Director": "Christopher Nolan",
+    "Cast": ["Christian Bale", "Heath Ledger"],
+    "Tags": ["Hero", "Crime", "Thriller"]
+  },
+  {
+    "Id": 4,
+    "Title": "Titanic",
+    "Genre": "Romance",
+    "Description": "A love story aboard the Titanic ship.",
+    "ReleaseYear": 1997,
+    "Rating": 7.9,
+    "Director": "James Cameron",
+    "Cast": ["Leonardo DiCaprio", "Kate Winslet"],
+    "Tags": ["Love", "Drama", "Historical"]
+  },
+  {
+    "Id": 5,
+    "Title": "Avengers: Endgame",
+    "Genre": "Action",
+    "Description": "The Avengers fight to restore the universe.",
+    "ReleaseYear": 2019,
+    "Rating": 8.4,
+    "Director": "Anthony Russo",
+    "Cast": ["Robert Downey Jr.", "Chris Evans"],
+    "Tags": ["Marvel", "Superhero", "Battle"]
+  },
+  {
+    "Id": 6,
+    "Title": "The Matrix",
+    "Genre": "Sci-Fi",
+    "Description": "A hacker discovers reality is a simulation.",
+    "ReleaseYear": 1999,
+    "Rating": 8.7,
+    "Director": "Wachowski Sisters",
+    "Cast": ["Keanu Reeves", "Laurence Fishburne"],
+    "Tags": ["AI", "Virtual Reality", "Action"]
+  },
+  {
+    "Id": 7,
+    "Title": "Joker",
+    "Genre": "Drama",
+    "Description": "The origin story of the Joker.",
+    "ReleaseYear": 2019,
+    "Rating": 8.4,
+    "Director": "Todd Phillips",
+    "Cast": ["Joaquin Phoenix", "Robert De Niro"],
+    "Tags": ["Psychology", "Crime", "Dark"]
+  },
+  {
+    "Id": 8,
+    "Title": "Spider-Man: No Way Home",
+    "Genre": "Action",
+    "Description": "Spider-Man faces enemies from other universes.",
+    "ReleaseYear": 2021,
+    "Rating": 8.2,
+    "Director": "Jon Watts",
+    "Cast": ["Tom Holland", "Zendaya"],
+    "Tags": ["Marvel", "Multiverse", "Hero"]
+  },
+  {
+    "Id": 9,
+    "Title": "The Conjuring",
+    "Genre": "Horror",
+    "Description": "Paranormal investigators help a haunted family.",
+    "ReleaseYear": 2013,
+    "Rating": 7.5,
+    "Director": "James Wan",
+    "Cast": ["Vera Farmiga", "Patrick Wilson"],
+    "Tags": ["Ghost", "Fear", "Thriller"]
+  },
+  {
+    "Id": 10,
+    "Title": "Frozen",
+    "Genre": "Animation",
+    "Description": "Two sisters discover the power of love.",
+    "ReleaseYear": 2013,
+    "Rating": 7.4,
+    "Director": "Chris Buck",
+    "Cast": ["Kristen Bell", "Idina Menzel"],
+    "Tags": ["Disney", "Music", "Family"]
+  },
+
+  {
+    "Id": 11,
+    "Title": "The Shawshank Redemption",
+    "Genre": "Drama",
+    "Description": "A banker is imprisoned and finds hope through friendship.",
+    "ReleaseYear": 1994,
+    "Rating": 9.3,
+    "Director": "Frank Darabont",
+    "Cast": ["Tim Robbins", "Morgan Freeman"],
+    "Tags": ["Hope", "Prison", "Friendship"]
+  },
+  {
+    "Id": 12,
+    "Title": "Forrest Gump",
+    "Genre": "Drama",
+    "Description": "The life journey of a simple but kind man.",
+    "ReleaseYear": 1994,
+    "Rating": 8.8,
+    "Director": "Robert Zemeckis",
+    "Cast": ["Tom Hanks"],
+    "Tags": ["Life", "History", "Drama"]
+  },
+  {
+    "Id": 13,
+    "Title": "The Godfather",
+    "Genre": "Crime",
+    "Description": "A mafia family story of power and loyalty.",
+    "ReleaseYear": 1972,
+    "Rating": 9.2,
+    "Director": "Francis Ford Coppola",
+    "Cast": ["Al Pacino", "Marlon Brando"],
+    "Tags": ["Mafia", "Crime", "Family"]
+  },
+  {
+    "Id": 14,
+    "Title": "Fight Club",
+    "Genre": "Drama",
+    "Description": "An underground fight club changes a man’s life.",
+    "ReleaseYear": 1999,
+    "Rating": 8.8,
+    "Director": "David Fincher",
+    "Cast": ["Brad Pitt", "Edward Norton"],
+    "Tags": ["Psychology", "Rebellion", "Twist"]
+  },
+  {
+    "Id": 15,
+    "Title": "Parasite",
+    "Genre": "Thriller",
+    "Description": "A poor family infiltrates a wealthy household.",
+    "ReleaseYear": 2019,
+    "Rating": 8.6,
+    "Director": "Bong Joon-ho",
+    "Cast": ["Song Kang-ho"],
+    "Tags": ["Class", "Social", "Twist"]
+  },
+  {
+    "Id": 16,
+    "Title": "Whiplash",
+    "Genre": "Drama",
+    "Description": "A young drummer faces a strict music teacher.",
+    "ReleaseYear": 2014,
+    "Rating": 8.5,
+    "Director": "Damien Chazelle",
+    "Cast": ["Miles Teller"],
+    "Tags": ["Music", "Pressure", "Ambition"]
+  },
+  {
+    "Id": 17,
+    "Title": "Coco",
+    "Genre": "Animation",
+    "Description": "A boy travels to the land of the dead.",
+    "ReleaseYear": 2017,
+    "Rating": 8.4,
+    "Director": "Lee Unkrich",
+    "Cast": ["Anthony Gonzalez"],
+    "Tags": ["Family", "Music", "Death"]
+  },
+  {
+    "Id": 18,
+    "Title": "Toy Story",
+    "Genre": "Animation",
+    "Description": "Toys come to life when humans are not around.",
+    "ReleaseYear": 1995,
+    "Rating": 8.3,
+    "Director": "John Lasseter",
+    "Cast": ["Tom Hanks", "Tim Allen"],
+    "Tags": ["Kids", "Friendship", "Adventure"]
+  },
+  {
+    "Id": 19,
+    "Title": "Inside Out",
+    "Genre": "Animation",
+    "Description": "Emotions control a young girl's mind.",
+    "ReleaseYear": 2015,
+    "Rating": 8.1,
+    "Director": "Pete Docter",
+    "Cast": ["Amy Poehler"],
+    "Tags": ["Emotions", "Family", "Mind"]
+  },
+  {
+    "Id": 20,
+    "Title": "The Lion King",
+    "Genre": "Animation",
+    "Description": "A lion prince learns responsibility.",
+    "ReleaseYear": 1994,
+    "Rating": 8.5,
+    "Director": "Roger Allers",
+    "Cast": ["Matthew Broderick"],
+    "Tags": ["Disney", "Kingdom", "Family"]
+  },
+
+  {
+    "Id": 21,
+    "Title": "Doctor Strange",
+    "Genre": "Action",
+    "Description": "A surgeon becomes a powerful sorcerer.",
+    "ReleaseYear": 2016,
+    "Rating": 7.5,
+    "Director": "Scott Derrickson",
+    "Cast": ["Benedict Cumberbatch"],
+    "Tags": ["Magic", "Marvel", "Mystic"]
+  },
+  {
+    "Id": 22,
+    "Title": "Guardians of the Galaxy",
+    "Genre": "Action",
+    "Description": "A group of space criminals save the galaxy.",
+    "ReleaseYear": 2014,
+    "Rating": 8.0,
+    "Director": "James Gunn",
+    "Cast": ["Chris Pratt"],
+    "Tags": ["Space", "Marvel", "Comedy"]
+  },
+  {
+    "Id": 23,
+    "Title": "Black Panther",
+    "Genre": "Action",
+    "Description": "A king protects his hidden African nation.",
+    "ReleaseYear": 2018,
+    "Rating": 7.3,
+    "Director": "Ryan Coogler",
+    "Cast": ["Chadwick Boseman"],
+    "Tags": ["Marvel", "King", "Power"]
+  },
+  {
+    "Id": 24,
+    "Title": "Iron Man",
+    "Genre": "Action",
+    "Description": "A billionaire becomes a armored superhero.",
+    "ReleaseYear": 2008,
+    "Rating": 7.9,
+    "Director": "Jon Favreau",
+    "Cast": ["Robert Downey Jr."],
+    "Tags": ["Tech", "Marvel", "Hero"]
+  },
+  {
+    "Id": 25,
+    "Title": "Mad Max: Fury Road",
+    "Genre": "Action",
+    "Description": "A post-apocalyptic chase for survival.",
+    "ReleaseYear": 2015,
+    "Rating": 8.1,
+    "Director": "George Miller",
+    "Cast": ["Tom Hardy"],
+    "Tags": ["Desert", "Survival", "Chaos"]
+  },
+  {
+    "Id": 26,
+    "Title": "John Wick",
+    "Genre": "Action",
+    "Description": "An assassin seeks revenge for his dog.",
+    "ReleaseYear": 2014,
+    "Rating": 7.4,
+    "Director": "Chad Stahelski",
+    "Cast": ["Keanu Reeves"],
+    "Tags": ["Revenge", "Crime", "Action"]
+  },
+  {
+    "Id": 27,
+    "Title": "The Prestige",
+    "Genre": "Thriller",
+    "Description": "Two magicians compete for the ultimate trick.",
+    "ReleaseYear": 2006,
+    "Rating": 8.5,
+    "Director": "Christopher Nolan",
+    "Cast": ["Hugh Jackman", "Christian Bale"],
+    "Tags": ["Magic", "Twist", "Competition"]
+  },
+  {
+    "Id": 28,
+    "Title": "Arrival",
+    "Genre": "Sci-Fi",
+    "Description": "A linguist communicates with aliens.",
+    "ReleaseYear": 2016,
+    "Rating": 7.9,
+    "Director": "Denis Villeneuve",
+    "Cast": ["Amy Adams"],
+    "Tags": ["Aliens", "Language", "Time"]
+  },
+  {
+    "Id": 29,
+    "Title": "The Revenant",
+    "Genre": "Drama",
+    "Description": "A man survives in the wild to seek revenge.",
+    "ReleaseYear": 2015,
+    "Rating": 8.0,
+    "Director": "Alejandro González Iñárritu",
+    "Cast": ["Leonardo DiCaprio"],
+    "Tags": ["Survival", "Nature", "Revenge"]
+  },
+  {
+    "Id": 30,
+    "Title": "The Lord of the Rings: Fellowship of the Ring",
+    "Genre": "Fantasy",
+    "Description": "A group begins a journey to destroy a powerful ring.",
+    "ReleaseYear": 2001,
+    "Rating": 8.8,
+    "Director": "Peter Jackson",
+    "Cast": ["Elijah Wood"],
+    "Tags": ["Fantasy", "Adventure", "Ring"]
+  },
+
+  {
+    "Id": 31,
+    "Title": "Shutter Island",
+    "Genre": "Thriller",
+    "Description": "A U.S. Marshal investigates a psychiatric hospital.",
+    "ReleaseYear": 2010,
+    "Rating": 8.2,
+    "Director": "Martin Scorsese",
+    "Cast": ["Leonardo DiCaprio"],
+    "Tags": ["Mystery", "Psychological", "Twist"]
+  },
+  {
+    "Id": 32,
+    "Title": "The Social Network",
+    "Genre": "Drama",
+    "Description": "The story of Facebook creation.",
+    "ReleaseYear": 2010,
+    "Rating": 7.8,
+    "Director": "David Fincher",
+    "Cast": ["Jesse Eisenberg"],
+    "Tags": ["Tech", "Business", "Drama"]
+  },
+  {
+    "Id": 33,
+    "Title": "Logan",
+    "Genre": "Action",
+    "Description": "An aging Wolverine protects a young mutant.",
+    "ReleaseYear": 2017,
+    "Rating": 8.1,
+    "Director": "James Mangold",
+    "Cast": ["Hugh Jackman"],
+    "Tags": ["X-Men", "Dark", "Hero"]
+  },
+  {
+    "Id": 34,
+    "Title": "Deadpool",
+    "Genre": "Action",
+    "Description": "A mercenary gains healing powers and humor.",
+    "ReleaseYear": 2016,
+    "Rating": 8.0,
+    "Director": "Tim Miller",
+    "Cast": ["Ryan Reynolds"],
+    "Tags": ["Comedy", "Marvel", "Antihero"]
+  },
+  {
+    "Id": 35,
+    "Title": "The Wolf of Wall Street",
+    "Genre": "Drama",
+    "Description": "A stockbroker rises and falls in finance world.",
+    "ReleaseYear": 2013,
+    "Rating": 8.2,
+    "Director": "Martin Scorsese",
+    "Cast": ["Leonardo DiCaprio"],
+    "Tags": ["Money", "Crime", "Business"]
+  },
+  {
+    "Id": 36,
+    "Title": "The Hangover",
+    "Genre": "Comedy",
+    "Description": "A bachelor party goes wrong in Las Vegas.",
+    "ReleaseYear": 2009,
+    "Rating": 7.7,
+    "Director": "Todd Phillips",
+    "Cast": ["Bradley Cooper"],
+    "Tags": ["Comedy", "Party", "Chaos"]
+  },
+  {
+    "Id": 37,
+    "Title": "Jumanji: Welcome to the Jungle",
+    "Genre": "Adventure",
+    "Description": "Players trapped inside a video game world.",
+    "ReleaseYear": 2017,
+    "Rating": 6.9,
+    "Director": "Jake Kasdan",
+    "Cast": ["Dwayne Johnson"],
+    "Tags": ["Game", "Adventure", "Comedy"]
+  },
+  {
+    "Id": 38,
+    "Title": "Gravity",
+    "Genre": "Sci-Fi",
+    "Description": "Astronauts struggle to survive in space.",
+    "ReleaseYear": 2013,
+    "Rating": 7.7,
+    "Director": "Alfonso Cuarón",
+    "Cast": ["Sandra Bullock"],
+    "Tags": ["Space", "Survival", "Drama"]
+  },
+  {
+    "Id": 39,
+    "Title": "Django Unchained",
+    "Genre": "Western",
+    "Description": "A freed slave becomes a bounty hunter.",
+    "ReleaseYear": 2012,
+    "Rating": 8.4,
+    "Director": "Quentin Tarantino",
+    "Cast": ["Jamie Foxx"],
+    "Tags": ["Revenge", "Western", "Action"]
+  },
+  {
+    "Id": 40,
+    "Title": "It Chapter Two",
+    "Genre": "Horror",
+    "Description": "The Losers Club returns to face Pennywise.",
+    "ReleaseYear": 2019,
+    "Rating": 6.8,
+    "Director": "Andy Muschietti",
+    "Cast": ["Bill Hader"],
+    "Tags": ["Clown", "Horror", "Fear"]
+  },
+ 
+  {
+    "Id": 45,
+    "Title": "A Quiet Place",
+    "Genre": "Horror",
+    "Description": "A family survives in silence to avoid monsters.",
+    "ReleaseYear": 2018,
+    "Rating": 7.5,
+    "Director": "John Krasinski",
+    "Cast": ["Emily Blunt"],
+    "Tags": ["Silence", "Monsters", "Survival"]
+  },
+  {
+    "Id": 46,
+    "Title": "The Notebook",
+    "Genre": "Romance",
+    "Description": "A timeless love story across decades.",
+    "ReleaseYear": 2004,
+    "Rating": 7.8,
+    "Director": "Nick Cassavetes",
+    "Cast": ["Ryan Gosling", "Rachel McAdams"],
+    "Tags": ["Love", "Drama", "Memory"]
+  },
+  {
+    "Id": 47,
+    "Title": "Black Swan",
+    "Genre": "Drama",
+    "Description": "A ballerina descends into psychological chaos.",
+    "ReleaseYear": 2010,
+    "Rating": 8.0,
+    "Director": "Darren Aronofsky",
+    "Cast": ["Natalie Portman"],
+    "Tags": ["Psychology", "Dance", "Dark"]
+  },
+  {
+    "Id": 48,
+    "Title": "Prisoners",
+    "Genre": "Thriller",
+    "Description": "A father searches for his missing daughter.",
+    "ReleaseYear": 2013,
+    "Rating": 8.1,
+    "Director": "Denis Villeneuve",
+    "Cast": ["Hugh Jackman"],
+    "Tags": ["Mystery", "Crime", "Search"]
+  },
+  {
+    "Id": 49,
+    "Title": "The Truman Show",
+    "Genre": "Drama",
+    "Description": "A man discovers his life is a TV show.",
+    "ReleaseYear": 1998,
+    "Rating": 8.2,
+    "Director": "Peter Weir",
+    "Cast": ["Jim Carrey"],
+    "Tags": ["Reality", "Life", "Freedom"]
+  },
+  {
+    "Id": 50,
+    "Title": "Her",
+    "Genre": "Romance",
+    "Description": "A man falls in love with an AI assistant.",
+    "ReleaseYear": 2013,
+    "Rating": 8.0,
+    "Director": "Spike Jonze",
+    "Cast": ["Joaquin Phoenix"],
+    "Tags": ["AI", "Love", "Future"]
+  }
+]
+

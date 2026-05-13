@@ -1,47 +1,64 @@
-﻿using MovieRecommendationSystem.Models;
-using project01.Recommendation;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using MovieRecommendationSystem.Models;
+using MovieRecommendationSystem.AI;
 
 namespace MovieRecommendationSystem.Services.Recommendation
 {
     public class RecommendationService
     {
-        private ContentBasedService contentService;
-        private CollaborativeFilteringService collaborativeService;
+        // =========================================
+        // AI Engine Instance
+        // =========================================
+        private readonly RecommendationEngine engine;
 
+        // =========================================
         // Constructor
-        public RecommendationService(
-            ContentBasedService content,
-            CollaborativeFilteringService collaborative)
+        // =========================================
+        public RecommendationService()
         {
-            contentService = content;
-            collaborativeService = collaborative;
+            // Initialize AI Engine once
+            engine = new RecommendationEngine();
         }
 
         // =========================================
-        // Get Hybrid Recommendations
+        // Get AI-Powered Recommendations
         // =========================================
         public List<Movie> GetRecommendations(User user)
         {
-            // Get content-based recommendations
-            List<Movie> contentBased = contentService.GetRecommendations(user);
-
-            // Get collaborative filtering recommendations
-            List<Movie> collaborative = collaborativeService.GetRecommendations(user);
-
-            // Merge both lists (Hybrid system)
-            List<Movie> finalList = new List<Movie>();
-
-            finalList.AddRange(contentBased);
-
-            foreach (var movie in collaborative)
+            // =========================================
+            // Validation
+            // =========================================
+            if (user == null)
             {
-                if (!finalList.Exists(m => m.Id == movie.Id))
-                    finalList.Add(movie);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("❌ Invalid user.");
+                Console.ResetColor();
+
+                return new List<Movie>();
             }
 
-            return finalList;
+            // =========================================
+            // Get recommendations from AI Engine
+            // =========================================
+            List<Movie> recommendations = engine.GenerateRecommendations(user);
+
+            // =========================================
+            // Safety check
+            // =========================================
+            if (recommendations == null)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("⚠ No recommendations found.");
+                Console.ResetColor();
+
+                return new List<Movie>();
+            }
+
+            // =========================================
+            // Return final result
+            // =========================================
+            return recommendations;
         }
     }
 }

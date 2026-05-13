@@ -1,87 +1,138 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using MovieRecommendationSystem.Models;
+using MovieRecommendationSystem.Utilities;
 
 namespace MovieRecommendationSystem.Services.Authentication
 {
     public class AuthenticationService
     {
-        // List to store all users in the system
         private List<User> users;
 
+        // 🔥 FIXED: absolute safe path
+        private string filePath =
+            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "User.json");
+
         // Constructor
-        // Used to initialize the users list
         public AuthenticationService(List<User> usersList)
         {
-            users = usersList;
+            users = usersList ?? new List<User>();
         }
 
         // ================================
-        // Register Method
+        // REGISTER
         // ================================
-        // This method creates a new user account
         public bool Register(string username, string password)
         {
-            // Check if username already exists
-            bool userExists = users.Any(u => u.Username == username);
+            // 🔹 Ensure Data folder exists (IMPORTANT FIX)
+            string folder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data");
 
-            if (userExists)
+            if (!Directory.Exists(folder))
             {
-                Console.WriteLine("Username already exists.");
+                Directory.CreateDirectory(folder);
+            }
+
+            // 🔹 Load latest users
+            users = FileManager.LoadData<User>(filePath);
+
+            // 🔹 Validate username
+            if (string.IsNullOrWhiteSpace(username))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Username cannot be empty.");
+                Console.ResetColor();
                 return false;
             }
 
-            // Create new user object
+            username = username.Trim();
+
+            // 🔹 Check duplicate username
+            if (users.Any(u => u.Username.ToLower() == username.ToLower()))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Username already exists.");
+                Console.ResetColor();
+                return false;
+            }
+
+            // 🔹 Validate password (6 digits only)
+            if (!IsValidPassword(password))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Password must be exactly 6 digits (numbers only).");
+                Console.ResetColor();
+                return false;
+            }
+
+            // 🔹 Create user
             User newUser = new User
             {
-                Id = users.Count + 1,
+                Id = users.Count > 0 ? users.Max(u => u.Id) + 1 : 1,
                 Username = username,
-                Password = password
+                Password = password,
+                FavoriteGenres = new List<string>(),
+                WatchHistory = new List<int>(),
+                Ratings = new List<Rating>()
             };
 
-            // Add user to users list
             users.Add(newUser);
 
-            Console.WriteLine("Registration completed successfully.");
+            // 🔥 SAVE DIRECTLY TO JSON
+            FileManager.SaveData(filePath, users);
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Registration completed successfully. User saved.");
+            Console.ResetColor();
 
             return true;
         }
 
         // ================================
-        // Login Method
+        // LOGIN
         // ================================
-        // This method checks user credentials
         public User Login(string username, string password)
         {
-            // Search for matching username and password
-            User loggedUser = users.FirstOrDefault
-            (
-                u => u.Username == username &&
-                     u.Password == password
-            );
+            users = FileManager.LoadData<User>(filePath);
 
-            // Check if user exists
+            var loggedUser = users.FirstOrDefault(u =>
+                u.Username == username &&
+                u.Password == password);
+
             if (loggedUser != null)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Login successful.");
+                Console.ResetColor();
+
                 return loggedUser;
             }
 
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Invalid username or password.");
+            Console.ResetColor();
+
             return null;
         }
 
         // ================================
-        // Logout Method
+        // LOGOUT
         // ================================
-        // This method logs out the user
         public void Logout(User user)
         {
             if (user != null)
             {
                 Console.WriteLine($"{user.Username} logged out successfully.");
             }
+        }
+
+        // ================================
+        // PASSWORD VALIDATION
+        // ================================
+        private bool IsValidPassword(string password)
+        {
+            return password.Length == 6 && password.All(char.IsDigit);
         }
     }
 }
