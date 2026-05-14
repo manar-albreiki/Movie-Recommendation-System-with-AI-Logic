@@ -1,8 +1,9 @@
-﻿using System;
+﻿using MovieRecommendationSystem.Models;
+using MovieRecommendationSystem.Services.Ratings;
+using MovieRecommendationSystem.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using MovieRecommendationSystem.Models;
-using MovieRecommendationSystem.Utilities;
 
 namespace MovieRecommendationSystem.Services.Movies
 {
@@ -101,30 +102,124 @@ namespace MovieRecommendationSystem.Services.Movies
 
             Console.WriteLine("Movie deleted successfully.");
         }
-
         // =========================================
-        // Display Movies
+        // DISPLAY MOVIES (FIXED RETURN)
         // =========================================
         public void DisplayMovies()
         {
+            // تحميل التقييمات كل مرة عشان تكون محدثة
+            var ratings = FileManager.LoadData<Rating>("Data/Rating.json") ?? new List<Rating>();
+
             if (movies.Count == 0)
             {
-                Console.WriteLine("No movies available.");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nNo movies available.");
+                Console.ResetColor();
+
+               
                 return;
             }
 
-            Console.WriteLine("\n===== Movies List =====");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine();
+            Console.ResetColor();
 
-            foreach (var movie in movies)
+            int cardsPerRow = 3;
+
+            for (int i = 0; i < movies.Count; i += cardsPerRow)
             {
-                Console.WriteLine($"ID: {movie.Id}");
-                Console.WriteLine($"Title: {movie.Title}");
-                Console.WriteLine($"Genre: {movie.Genre}");
-                Console.WriteLine($"Year: {movie.ReleaseYear}");
-                Console.WriteLine($"Director: {movie.Director}");
-                Console.WriteLine($"Rating: {movie.Rating}");
-                Console.WriteLine("------------------------");
+                var rowMovies = movies.Skip(i).Take(cardsPerRow).ToList();
+
+                // TOP
+                foreach (var movie in rowMovies)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write("╔══════════════════════════════╗   ");
+                }
+                Console.WriteLine();
+
+                // TITLE
+                foreach (var movie in rowMovies)
+                {
+                    string value = movie.Title.Length > 18
+                        ? movie.Title.Substring(0, 18)
+                        : movie.Title;
+
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write($"║ Title   : {value,-18} ║   ");
+                }
+                Console.WriteLine();
+
+                // GENRE
+                foreach (var movie in rowMovies)
+                {
+                    string value = movie.Genre.Length > 18
+                        ? movie.Genre.Substring(0, 18)
+                        : movie.Genre;
+
+                    Console.Write($"║ Genre   : {value,-18} ║   ");
+                }
+                Console.WriteLine();
+
+                // YEAR
+                foreach (var movie in rowMovies)
+                {
+                    Console.Write($"║ Year    : {movie.ReleaseYear,-18} ║   ");
+                }
+                Console.WriteLine();
+
+                // DIRECTOR
+                foreach (var movie in rowMovies)
+                {
+                    string value = movie.Director.Length > 18
+                        ? movie.Director.Substring(0, 18)
+                        : movie.Director;
+
+                    Console.Write($"║ Director: {value,-18} ║   ");
+                }
+                Console.WriteLine();
+
+                // ⭐ RATING (FIX IMPORTANT PART)
+                foreach (var movie in rowMovies)
+                {
+                    var movieRatings = ratings.Where(r => r.MovieId == movie.Id).ToList();
+
+                    double avg = movieRatings.Count == 0
+                        ? 0
+                        : movieRatings.Average(r => r.Score);
+
+                    Console.Write($"║ Rating  : {avg,-18:F1} ║   ");
+                }
+                Console.WriteLine();
+
+                // ID
+                foreach (var movie in rowMovies)
+                {
+                    Console.Write($"║ ID      : {movie.Id,-18} ║   ");
+                }
+                Console.WriteLine();
+
+                // BOTTOM
+                foreach (var movie in rowMovies)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write("╚══════════════════════════════╝   ");
+                }
+
+                Console.WriteLine("\n");
             }
+
+            Console.ResetColor();
+
+            //Console.ForegroundColor = ConsoleColor.Yellow;
+            //Console.WriteLine("\nPress any key to return...");
+            //Console.ResetColor();
+
+            //Console.ReadKey();
         }
     }
 }
+
+
+
+        

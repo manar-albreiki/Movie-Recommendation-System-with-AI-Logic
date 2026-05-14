@@ -10,11 +10,120 @@ using MovieRecommendationSystem.Utilities;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace MovieRecommendationSystem
 {
     class Program
     {
+        // =========================================
+        // CENTER TEXT
+        // =========================================
+        static void CenterText(string text, ConsoleColor color = ConsoleColor.White)
+        {
+            Console.ForegroundColor = color;
+
+            int left = (Console.WindowWidth - text.Length) / 2;
+            if (left < 0) left = 0;
+
+            Console.SetCursorPosition(left, Console.CursorTop);
+            Console.WriteLine(text);
+
+            Console.ResetColor();
+        }
+
+        // =========================================
+        // CENTER INPUT
+        // =========================================
+        static string CenterInput(string text, ConsoleColor color = ConsoleColor.White)
+        {
+            Console.ForegroundColor = color;
+
+            int left = (Console.WindowWidth - text.Length) / 2;
+            if (left < 0) left = 0;
+
+            Console.SetCursorPosition(left, Console.CursorTop);
+            Console.Write(text);
+
+            Console.ResetColor();
+
+            return Console.ReadLine();
+        }
+
+        // =========================================
+        // SUCCESS
+        // =========================================
+        static void SuccessMessage(string text)
+        {
+            Console.Clear();
+            ShowLogo();
+            CenterText(text, ConsoleColor.Green);
+        }
+
+        // =========================================
+        // ERROR
+        // =========================================
+        static void ErrorMessage(string text)
+        {
+            Console.Clear();
+            ShowLogo();
+            CenterText(text, ConsoleColor.Red);
+        }
+
+        // =========================================
+        // LOADING (بدون توقف تلقائي بعده)
+        // =========================================
+        static void Loading(string text)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                Console.Clear();
+                ShowLogo();
+                CenterText(text + new string('.', i + 1), ConsoleColor.DarkRed);
+                Thread.Sleep(200);
+            }
+        }
+
+        // =========================================
+        // LOGO
+        // =========================================
+        static void ShowLogo()
+        {
+            Console.Clear();
+
+            Console.ForegroundColor = ConsoleColor.Red;
+
+            CenterText(@"███╗   ███╗ ██████╗ ██╗   ██╗██╗███████╗");
+            CenterText(@"████╗ ████║██╔═══██╗██║   ██║██║██╔════╝");
+            CenterText(@"██╔████╔██║██║   ██║██║   ██║██║█████╗  ");
+            CenterText(@"██║╚██╔╝██║██║   ██║╚██╗ ██╔╝██║██╔══╝  ");
+            CenterText(@"██║ ╚═╝ ██║╚██████╔╝ ╚████╔╝ ██║███████╗");
+            CenterText(@"╚═╝     ╚═╝ ╚═════╝   ╚═══╝  ╚═╝╚══════╝");
+
+            Console.WriteLine();
+            CenterText("MOVIE RECOMMENDATION SYSTEM", ConsoleColor.Red);
+            Console.WriteLine();
+        }
+
+        // =========================================
+        // MENU BOX
+        // =========================================
+        static void MenuBox(string[] items)
+        {
+            CenterText("╔══════════════════════════════╗");
+
+            foreach (var item in items)
+            {
+                CenterText($"║ {item.PadRight(29)}║", ConsoleColor.White);
+            }
+
+            CenterText("╚══════════════════════════════╝");
+            Console.WriteLine();
+        }
+
+        // =========================================
+        // USER MENU
+        // =========================================
         static void UserMenu(
             User user,
             MovieService movieService,
@@ -25,137 +134,131 @@ namespace MovieRecommendationSystem
         {
             while (true)
             {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"\n===== Welcome ({user.Username}) =====");
-                Console.ResetColor();
+                ShowLogo();
 
-                Console.WriteLine("1. Browse Movies");
-                Console.WriteLine("2. Search Movies");
-                Console.WriteLine("3. Watch Movie");
-                Console.WriteLine("4. Rate Movie");
-                Console.WriteLine("5. View Recommendations");
-                Console.WriteLine("6. Watch History");
-                Console.WriteLine("7. Logout");
+                CenterText($"Welcome {user.Username}", ConsoleColor.Green);
 
-                Console.Write("\nChoose: ");
+                MenuBox(new string[]
+                {
+                    "1. Browse Movies",
+                    "2. Search Movies",
+                    "3. Watch Movie",
+                    "4. Rate Movie",
+                    "5. Recommendations",
+                    "6. Watch History",
+                    "7. Logout"
+                });
 
-                string choice = Console.ReadLine();
+                string choice = CenterInput("Choose Option: ", ConsoleColor.Yellow);
 
-                Console.WriteLine();
-
-                // =========================================
-                // 1. Browse Movies
-                // =========================================
+                // =========================
+                // 1 BROWSE
+                // =========================
                 if (choice == "1")
                 {
+                    ShowLogo();
+                    CenterText("AVAILABLE MOVIES", ConsoleColor.Cyan);
+
                     movieService.DisplayMovies();
+
+                    Console.WriteLine("\nPress any key to return...");
+                    Console.ReadKey();
                 }
 
-                // =========================================
-                // 2. Search Movies
-                // =========================================
+                // =========================
+                // 2 SEARCH
+                // =========================
                 else if (choice == "2")
                 {
-                    Console.Write("Enter keyword: ");
-                    string keyword = Console.ReadLine();
+                    ShowLogo();
+
+                    string keyword = CenterInput("Enter Keyword: ", ConsoleColor.Yellow);
 
                     var results = searchService.SmartSearch(keyword);
 
                     searchService.DisplayResults(results);
+
+                    Console.WriteLine("\nPress any key to return...");
+                    Console.ReadKey();
                 }
 
-                // =========================================
-                // 3. Watch Movie
-                // =========================================
+                // =========================
+                // 3 WATCH
+                // =========================
                 else if (choice == "3")
                 {
-                    Console.Write("Enter Movie ID to watch: ");
-                    int movieId = int.Parse(Console.ReadLine());
+                    ShowLogo();
+
+                    int movieId = int.Parse(CenterInput("Enter Movie ID: ", ConsoleColor.Yellow));
 
                     var movie = movieService.GetMovieById(movieId);
 
                     if (movie != null)
                     {
-                        // create history list if null
-                        if (user.WatchHistory == null)
-                        {
-                            user.WatchHistory = new List<int>();
-                        }
+                        user.WatchHistory ??= new List<int>();
 
-                        // add only if not already watched
                         if (!user.WatchHistory.Contains(movieId))
-                        {
                             user.WatchHistory.Add(movieId);
-                        }
 
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine($"You watched: {movie.Title}");
-                        Console.ResetColor();
+                        SuccessMessage("Now Watching: " + movie.Title);
                     }
                     else
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Movie not found.");
-                        Console.ResetColor();
+                        ErrorMessage("Movie Not Found");
                     }
+
+                    Console.WriteLine("\nPress any key to return...");
+                    Console.ReadKey();
                 }
-                // =========================================
-                // 4. Rate Movie
-                // =========================================
+
+                // =========================
+                // 4 RATE
+                // =========================
                 else if (choice == "4")
                 {
-                    Console.Write("Enter Movie ID: ");
+                    ShowLogo();
 
-                    int movieId =
-                        int.Parse(Console.ReadLine());
+                    int movieId = int.Parse(CenterInput("Enter Movie ID: ", ConsoleColor.Yellow));
+                    int score = int.Parse(CenterInput("Enter Rating (1-5): ", ConsoleColor.Yellow));
 
-                    Console.Write("Enter Rating (1-5): ");
+                    ratingService.AddOrUpdateRating(user.Id, movieId, score);
 
-                    int score =
-                        int.Parse(Console.ReadLine());
+                    SuccessMessage("Rating Saved Successfully!");
 
-                    ratingService.AddOrUpdateRating(
-                        user.Id,
-                        movieId,
-                        score);
+                    Console.WriteLine("\nPress any key to return...");
+                    Console.ReadKey();
                 }
 
-                // =========================================
-                // 5. Recommendations
-                // =========================================
+                // =========================
+                // 5 RECOMMEND
+                // =========================
                 else if (choice == "5")
                 {
-                    var results =
-                        recommendationService
-                        .GetRecommendations(user);
+                    ShowLogo();
 
-                    Console.ForegroundColor =
-                        ConsoleColor.Yellow;
+                    CenterText("RECOMMENDED FOR YOU", ConsoleColor.Magenta);
 
-                    Console.WriteLine(
-                        "===== RECOMMENDATIONS =====");
-
-                    Console.ResetColor();
+                    var results = recommendationService.GetRecommendations(user);
 
                     foreach (var movie in results)
-                    {
-                        Console.WriteLine(
-                            $"{movie.Title} | {movie.Rating:F1}");
-                    }
+                        CenterText($"{movie.Title} | {movie.Rating:F1}");
+
+                    Console.WriteLine("\nPress any key to return...");
+                    Console.ReadKey();
                 }
 
-                // =========================================
-                // 6. Watch History
-                // =========================================
+                // =========================
+                // 6 HISTORY
+                // =========================
                 else if (choice == "6")
                 {
-                    Console.ForegroundColor = ConsoleColor.Magenta;
-                    Console.WriteLine("===== WATCH HISTORY =====");
-                    Console.ResetColor();
+                    ShowLogo();
+
+                    CenterText("WATCH HISTORY", ConsoleColor.Cyan);
 
                     if (user.WatchHistory == null || user.WatchHistory.Count == 0)
                     {
-                        Console.WriteLine("No watched movies yet.");
+                        ErrorMessage("No Watched Movies Yet");
                     }
                     else
                     {
@@ -164,125 +267,108 @@ namespace MovieRecommendationSystem
                             var movie = movieService.GetMovieById(movieId);
 
                             if (movie != null)
-                            {
-                                Console.WriteLine(
-                                    $"ID: {movie.Id} | {movie.Title} | {movie.Genre}"
-                                );
-                            }
+                                CenterText($"{movie.Title} | {movie.Genre}");
                         }
                     }
+
+                    Console.WriteLine("\nPress any key to return...");
+                    Console.ReadKey();
                 }
-                // =========================================
-                // 7. Logout
-                // =========================================
+
+                // =========================
+                // LOGOUT
+                // =========================
                 else if (choice == "7")
                 {
-                    Console.WriteLine(
-                        "Logged out successfully.");
-
+                    SuccessMessage("Logged Out Successfully");
+                    Thread.Sleep(2000);
                     break;
                 }
 
-                // =========================================
-                // Invalid Option
-                // =========================================
                 else
                 {
-                    Console.ForegroundColor =
-                        ConsoleColor.Red;
-
-                    Console.WriteLine(
-                        "Invalid option, try again.");
-
-                    Console.ResetColor();
+                    ErrorMessage("Invalid Option");
+                    Console.WriteLine("\nPress any key to retry...");
+                    Console.ReadKey();
                 }
             }
         }
 
+        // =========================================
+        // MAIN
+        // =========================================
         static void Main(string[] args)
         {
-            AuthenticationService authService =
-                new AuthenticationService(
-                    FileManager.LoadData<User>(
-                        "Data/User.json"));
+            Console.Title = "MOVIE SYSTEM";
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.Clear();
 
-            MovieService movieService =
-                new MovieService();
+            var authService = new AuthenticationService(
+                FileManager.LoadData<User>("Data/User.json"));
 
-            SearchService searchService =
-                new SearchService();
-
-            RatingService ratingService =
-                new RatingService();
-
-            RecommendationService recommendationService =
-                new RecommendationService();
-
-            RecommendationEngine aiEngine =
-                new RecommendationEngine();
+            MovieService movieService = new MovieService();
+            SearchService searchService = new SearchService();
+            RatingService ratingService = new RatingService();
+            RecommendationService recommendationService = new RecommendationService();
+            RecommendationEngine aiEngine = new RecommendationEngine();
 
             User currentUser = null;
 
             while (true)
             {
-                Console.ForegroundColor =
-                    ConsoleColor.Cyan;
+                ShowLogo();
 
-                Console.WriteLine(
-                    "\n===== Movie Recommendation System =====");
+                MenuBox(new string[]
+                {
+                    "1. Register",
+                    "2. Login",
+                    "3. Exit"
+                });
 
-                Console.ResetColor();
+                string choice = CenterInput("Choose Option: ", ConsoleColor.Yellow);
 
-                Console.WriteLine("1. Register");
-                Console.WriteLine("2. Login");
-                Console.WriteLine("3. Exit");
-
-                Console.Write("Choose: ");
-
-                string choice = Console.ReadLine();
-
-                // =========================================
-                // REGISTER
-                // =========================================
                 if (choice == "1")
                 {
-                    Console.Write("Enter username: ");
+                    ShowLogo();
 
-                    string username =
-                        Console.ReadLine();
+                    string username = CenterInput("Enter Username: ");
+                    string password = CenterInput("Enter Password: ");
 
-                    Console.Write("Enter password: ");
+                    Loading("Creating Account");
 
-                    string password =
-                        Console.ReadLine();
+                    bool success = authService.Register(username, password);
 
-                    authService.Register(
-                        username,
-                        password);
+                    if (success)
+                    {
+                        SuccessMessage("Registered Successfully!");
+
+                        Thread.Sleep(2000); // يدخل تلقائي بعد 2 ثانية
+                    }
+                    else
+                    {
+                        ErrorMessage("Username already exists");
+
+                        Thread.Sleep(2000); // يرجع للمينيو تلقائي
+                    }
                 }
 
-                // =========================================
-                // LOGIN
-                // =========================================
                 else if (choice == "2")
                 {
-                    Console.Write("Enter username: ");
+                    ShowLogo();
 
-                    string username =
-                        Console.ReadLine();
+                    string username = CenterInput("Enter Username: ");
+                    string password = CenterInput("Enter Password: ");
 
-                    Console.Write("Enter password: ");
+                    Loading("Signing In");
 
-                    string password =
-                        Console.ReadLine();
-
-                    currentUser =
-                        authService.Login(
-                            username,
-                            password);
+                    currentUser = authService.Login(username, password);
 
                     if (currentUser != null)
                     {
+                        SuccessMessage("Login Successful!");
+
+                        Thread.Sleep(2000); // يدخل تلقائي للصفحة الثانية
+
                         UserMenu(
                             currentUser,
                             movieService,
@@ -291,29 +377,27 @@ namespace MovieRecommendationSystem
                             recommendationService,
                             aiEngine);
                     }
+                    else
+                    {
+                        ErrorMessage("Wrong Username or Password");
+
+                        Thread.Sleep(2000); // يرجع للمينيو الرئيسي
+                    }
                 }
 
-                // =========================================
-                // EXIT
-                // =========================================
                 else if (choice == "3")
                 {
-                    Console.WriteLine("Goodbye");
+                    Loading("Closing");
+                    CenterText("GOODBYE", ConsoleColor.Red);
+                    Console.ReadKey();
                     break;
                 }
 
-                // =========================================
-                // INVALID OPTION
-                // =========================================
                 else
                 {
-                    Console.ForegroundColor =
-                        ConsoleColor.Red;
-
-                    Console.WriteLine(
-                        "Invalid option.");
-
-                    Console.ResetColor();
+                    ErrorMessage("Invalid Option");
+                    Console.WriteLine("\nPress any key...");
+                    Console.ReadKey();
                 }
             }
         }

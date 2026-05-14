@@ -82,9 +82,7 @@ namespace MovieRecommendationSystem.Services.Authentication
             // 🔥 SAVE DIRECTLY TO JSON
             FileManager.SaveData(filePath, users);
 
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Registration completed successfully. User saved.");
-            Console.ResetColor();
+            
 
             return true;
         }

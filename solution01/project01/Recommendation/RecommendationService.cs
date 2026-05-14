@@ -32,7 +32,7 @@ namespace MovieRecommendationSystem.Services.Recommendation
             if (user == null)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("❌ Invalid user.");
+                Console.WriteLine("Invalid user.");
                 Console.ResetColor();
 
                 return new List<Movie>();
@@ -49,7 +49,7 @@ namespace MovieRecommendationSystem.Services.Recommendation
             if (recommendations == null)
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("⚠ No recommendations found.");
+                Console.WriteLine(" No recommendations found.");
                 Console.ResetColor();
 
                 return new List<Movie>();
