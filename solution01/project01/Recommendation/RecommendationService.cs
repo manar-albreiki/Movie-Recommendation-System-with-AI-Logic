@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using MovieRecommendationSystem.Models;
 using MovieRecommendationSystem.AI;
 
@@ -7,58 +8,33 @@ namespace MovieRecommendationSystem.Services.Recommendation
 {
     public class RecommendationService
     {
-        // =========================================
-        // AI Engine Instance
-        // =========================================
         private readonly RecommendationEngine engine;
 
-        // =========================================
-        // Constructor
-        // =========================================
         public RecommendationService()
         {
-            // Initialize AI Engine once
             engine = new RecommendationEngine();
         }
 
         // =========================================
-        // Get AI-Powered Recommendations
+        // GET RECOMMENDATIONS (PERSONALIZED FIX)
         // =========================================
         public List<Movie> GetRecommendations(User user)
         {
-            // =========================================
-            // Validation
-            // =========================================
             if (user == null)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Invalid user.");
-                Console.ResetColor();
-
                 return new List<Movie>();
-            }
 
-            // =========================================
-            // Get recommendations from AI Engine
-            // =========================================
-            List<Movie> recommendations = engine.GenerateRecommendations(user);
+            var recommendations = engine.GenerateRecommendations(user);
 
-            // =========================================
-            // Safety check
-            // =========================================
             if (recommendations == null)
-            {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine(" No recommendations found.");
-                Console.ResetColor();
-
                 return new List<Movie>();
-            }
 
-            // =========================================
-            // Return final result
-            // =========================================
-            return recommendations;
+            // 🔥 make results different per user
+            return recommendations
+                .OrderByDescending(m =>
+                    user.WatchHistory != null &&
+                    user.WatchHistory.Contains(m.Id) ? 2 : 0)
+                .ThenByDescending(m => m.Rating)
+                .ToList();
         }
     }
 }

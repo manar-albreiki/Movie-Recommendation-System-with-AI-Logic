@@ -16,43 +16,44 @@ namespace MovieRecommendationSystem
 {
     class Program
     {
-        // =========================================
-        // CENTER TEXT
-        // =========================================
-        static void CenterText(string text, ConsoleColor color = ConsoleColor.White)
+        static void CenterText(string text,
+            ConsoleColor color = ConsoleColor.White)
         {
             Console.ForegroundColor = color;
 
             int left = (Console.WindowWidth - text.Length) / 2;
             if (left < 0) left = 0;
 
-            Console.SetCursorPosition(left, Console.CursorTop);
-            Console.WriteLine(text);
+            try
+            {
+                Console.SetCursorPosition(left, Console.CursorTop);
+            }
+            catch { }
 
+            Console.WriteLine(text);
             Console.ResetColor();
         }
 
-        // =========================================
-        // CENTER INPUT
-        // =========================================
-        static string CenterInput(string text, ConsoleColor color = ConsoleColor.White)
+        static string CenterInput(string text,
+            ConsoleColor color = ConsoleColor.White)
         {
             Console.ForegroundColor = color;
 
             int left = (Console.WindowWidth - text.Length) / 2;
             if (left < 0) left = 0;
 
-            Console.SetCursorPosition(left, Console.CursorTop);
+            try
+            {
+                Console.SetCursorPosition(left, Console.CursorTop);
+            }
+            catch { }
+
             Console.Write(text);
 
             Console.ResetColor();
-
             return Console.ReadLine();
         }
 
-        // =========================================
-        // SUCCESS
-        // =========================================
         static void SuccessMessage(string text)
         {
             Console.Clear();
@@ -60,9 +61,6 @@ namespace MovieRecommendationSystem
             CenterText(text, ConsoleColor.Green);
         }
 
-        // =========================================
-        // ERROR
-        // =========================================
         static void ErrorMessage(string text)
         {
             Console.Clear();
@@ -70,9 +68,6 @@ namespace MovieRecommendationSystem
             CenterText(text, ConsoleColor.Red);
         }
 
-        // =========================================
-        // LOADING (بدون توقف تلقائي بعده)
-        // =========================================
         static void Loading(string text)
         {
             for (int i = 0; i < 3; i++)
@@ -80,17 +75,13 @@ namespace MovieRecommendationSystem
                 Console.Clear();
                 ShowLogo();
                 CenterText(text + new string('.', i + 1), ConsoleColor.DarkRed);
-                Thread.Sleep(200);
+                Thread.Sleep(250);
             }
         }
 
-        // =========================================
-        // LOGO
-        // =========================================
         static void ShowLogo()
         {
             Console.Clear();
-
             Console.ForegroundColor = ConsoleColor.Red;
 
             CenterText(@"███╗   ███╗ ██████╗ ██╗   ██╗██╗███████╗");
@@ -105,25 +96,17 @@ namespace MovieRecommendationSystem
             Console.WriteLine();
         }
 
-        // =========================================
-        // MENU BOX
-        // =========================================
         static void MenuBox(string[] items)
         {
             CenterText("╔══════════════════════════════╗");
 
             foreach (var item in items)
-            {
-                CenterText($"║ {item.PadRight(29)}║", ConsoleColor.White);
-            }
+                CenterText($"║ {item.PadRight(29)}║");
 
             CenterText("╚══════════════════════════════╝");
             Console.WriteLine();
         }
 
-        // =========================================
-        // USER MENU
-        // =========================================
         static void UserMenu(
             User user,
             MovieService movieService,
@@ -152,21 +135,115 @@ namespace MovieRecommendationSystem
                 string choice = CenterInput("Choose Option: ", ConsoleColor.Yellow);
 
                 // =========================
-                // 1 BROWSE
+                // 1. Browse Movies
                 // =========================
                 if (choice == "1")
                 {
                     ShowLogo();
+
                     CenterText("AVAILABLE MOVIES", ConsoleColor.Cyan);
+                    Console.WriteLine();
 
-                    movieService.DisplayMovies();
+                    var movies = movieService.GetAllMovies();
 
-                    Console.WriteLine("\nPress any key to return...");
+                    int cardWidth = 35;
+                    int spacing = 5;
+
+                    for (int i = 0; i < movies.Count; i += 3)
+                    {
+                        var row = movies.Skip(i).Take(3).ToList();
+
+                        // ================= TOP =================
+                        string topLine = "";
+
+                        foreach (var movie in row)
+                        {
+                            topLine += "╔" + new string('═', cardWidth - 2) + "╗";
+                            topLine += new string(' ', spacing);
+                        }
+
+                        CenterText(topLine);
+
+                        // ================= TITLE =================
+                        string titleLine = "";
+
+                        foreach (var movie in row)
+                        {
+                            string title = movie.Title;
+
+                            if (title.Length > cardWidth - 4)
+                                title = title.Substring(0, cardWidth - 7) + "...";
+
+                            titleLine += $"║ {title.PadRight(cardWidth - 4)} ║";
+                            titleLine += new string(' ', spacing);
+                        }
+
+                        CenterText(titleLine);
+
+                        // ================= GENRE =================
+                        string genreLine = "";
+
+                        foreach (var movie in row)
+                        {
+                            string genre = "Genre: " + movie.Genre;
+
+                            genreLine += $"║ {genre.PadRight(cardWidth - 4)} ║";
+                            genreLine += new string(' ', spacing);
+                        }
+
+                        CenterText(genreLine);
+
+                        // ================= RATING =================
+                        string ratingLine = "";
+
+                        foreach (var movie in row)
+                        {
+                            double avg = ratingService.GetAverageRating(movie.Id);
+                            int count = ratingService.GetRatingsCount(movie.Id);
+
+                            string rating =
+                                count == 0
+                                ? "Rating: No Ratings"
+                                : $"Rating: {avg:F1}/5";
+
+                            ratingLine += $"║ {rating.PadRight(cardWidth - 4)} ║";
+                            ratingLine += new string(' ', spacing);
+                        }
+
+                        CenterText(ratingLine);
+
+                        // ================= MOVIE ID =================
+                        string idLine = "";
+
+                        foreach (var movie in row)
+                        {
+                            string idText = $"Movie ID: {movie.Id}";
+
+                            idLine += $"║ {idText.PadRight(cardWidth - 4)} ║";
+                            idLine += new string(' ', spacing);
+                        }
+
+                        CenterText(idLine);
+
+                        // ================= BOTTOM =================
+                        string bottomLine = "";
+
+                        foreach (var movie in row)
+                        {
+                            bottomLine += "╚" + new string('═', cardWidth - 2) + "╝";
+                            bottomLine += new string(' ', spacing);
+                        }
+
+                        CenterText(bottomLine);
+
+                        Console.WriteLine("\n");
+                    }
+
+                    CenterText("Press Any Key To Return...", ConsoleColor.DarkGray);
                     Console.ReadKey();
                 }
-
                 // =========================
-                // 2 SEARCH
+                // 2. Search
                 // =========================
                 else if (choice == "2")
                 {
@@ -175,21 +252,25 @@ namespace MovieRecommendationSystem
                     string keyword = CenterInput("Enter Keyword: ", ConsoleColor.Yellow);
 
                     var results = searchService.SmartSearch(keyword);
-
                     searchService.DisplayResults(results);
 
-                    Console.WriteLine("\nPress any key to return...");
+                    Console.WriteLine("\nPress any key...");
                     Console.ReadKey();
                 }
 
                 // =========================
-                // 3 WATCH
+                // 3. Watch Movie
                 // =========================
                 else if (choice == "3")
                 {
                     ShowLogo();
 
-                    int movieId = int.Parse(CenterInput("Enter Movie ID: ", ConsoleColor.Yellow));
+                    if (!int.TryParse(CenterInput("Enter Movie ID: ", ConsoleColor.Yellow), out int movieId))
+                    {
+                        ErrorMessage("Invalid Movie ID");
+                        Console.ReadKey();
+                        continue;
+                    }
 
                     var movie = movieService.GetMovieById(movieId);
 
@@ -202,35 +283,34 @@ namespace MovieRecommendationSystem
 
                         SuccessMessage("Now Watching: " + movie.Title);
                     }
-                    else
-                    {
-                        ErrorMessage("Movie Not Found");
-                    }
+                    else ErrorMessage("Movie Not Found");
 
-                    Console.WriteLine("\nPress any key to return...");
                     Console.ReadKey();
                 }
 
                 // =========================
-                // 4 RATE
+                // 4. Rate Movie
                 // =========================
                 else if (choice == "4")
                 {
                     ShowLogo();
 
-                    int movieId = int.Parse(CenterInput("Enter Movie ID: ", ConsoleColor.Yellow));
-                    int score = int.Parse(CenterInput("Enter Rating (1-5): ", ConsoleColor.Yellow));
+                    if (!int.TryParse(CenterInput("Enter Movie ID: ", ConsoleColor.Yellow), out int movieId) ||
+                        !int.TryParse(CenterInput("Enter Rating (1-5): ", ConsoleColor.Yellow), out int score))
+                    {
+                        ErrorMessage("Invalid Input");
+                        Console.ReadKey();
+                        continue;
+                    }
 
                     ratingService.AddOrUpdateRating(user.Id, movieId, score);
 
                     SuccessMessage("Rating Saved Successfully!");
-
-                    Console.WriteLine("\nPress any key to return...");
                     Console.ReadKey();
                 }
 
                 // =========================
-                // 5 RECOMMEND
+                // 5. Recommendations
                 // =========================
                 else if (choice == "5")
                 {
@@ -240,15 +320,28 @@ namespace MovieRecommendationSystem
 
                     var results = recommendationService.GetRecommendations(user);
 
-                    foreach (var movie in results)
-                        CenterText($"{movie.Title} | {movie.Rating:F1}");
+                    if (results == null || results.Count == 0)
+                    {
+                        CenterText("No Recommendations Found", ConsoleColor.Red);
+                    }
+                    else
+                    {
+                        foreach (var movie in results)
+                        {
+                            double avg = ratingService.GetAverageRating(movie.Id);
 
-                    Console.WriteLine("\nPress any key to return...");
+                            if (avg == 0)
+                                CenterText($"{movie.Title} | No Ratings Yet");
+                            else
+                                CenterText($"{movie.Title} |  {avg:F1}");
+                        }
+                    }
+
                     Console.ReadKey();
                 }
 
                 // =========================
-                // 6 HISTORY
+                // 6. Watch History
                 // =========================
                 else if (choice == "6")
                 {
@@ -257,46 +350,38 @@ namespace MovieRecommendationSystem
                     CenterText("WATCH HISTORY", ConsoleColor.Cyan);
 
                     if (user.WatchHistory == null || user.WatchHistory.Count == 0)
-                    {
-                        ErrorMessage("No Watched Movies Yet");
-                    }
+                        CenterText("No Watched Movies Yet", ConsoleColor.Red);
                     else
                     {
-                        foreach (var movieId in user.WatchHistory)
+                        foreach (var id in user.WatchHistory)
                         {
-                            var movie = movieService.GetMovieById(movieId);
-
+                            var movie = movieService.GetMovieById(id);
                             if (movie != null)
                                 CenterText($"{movie.Title} | {movie.Genre}");
                         }
                     }
 
-                    Console.WriteLine("\nPress any key to return...");
                     Console.ReadKey();
                 }
 
                 // =========================
-                // LOGOUT
+                // 7. Logout
                 // =========================
                 else if (choice == "7")
                 {
                     SuccessMessage("Logged Out Successfully");
-                    Thread.Sleep(2000);
+                    Thread.Sleep(1500);
                     break;
                 }
 
                 else
                 {
                     ErrorMessage("Invalid Option");
-                    Console.WriteLine("\nPress any key to retry...");
                     Console.ReadKey();
                 }
             }
         }
 
-        // =========================================
-        // MAIN
-        // =========================================
         static void Main(string[] args)
         {
             Console.Title = "MOVIE SYSTEM";
@@ -329,48 +414,34 @@ namespace MovieRecommendationSystem
 
                 if (choice == "1")
                 {
-                    ShowLogo();
-
-                    string username = CenterInput("Enter Username: ");
-                    string password = CenterInput("Enter Password: ");
+                    string u = CenterInput("Username: ");
+                    string p = CenterInput("Password: ");
 
                     Loading("Creating Account");
 
-                    bool success = authService.Register(username, password);
-
-                    if (success)
-                    {
+                    if (authService.Register(u, p))
                         SuccessMessage("Registered Successfully!");
-
-                        Thread.Sleep(2000); // يدخل تلقائي بعد 2 ثانية
-                    }
                     else
-                    {
                         ErrorMessage("Username already exists");
 
-                        Thread.Sleep(2000); // يرجع للمينيو تلقائي
-                    }
+                    Thread.Sleep(1500);
                 }
 
                 else if (choice == "2")
                 {
-                    ShowLogo();
-
-                    string username = CenterInput("Enter Username: ");
-                    string password = CenterInput("Enter Password: ");
+                    string u = CenterInput("Username: ");
+                    string p = CenterInput("Password: ");
 
                     Loading("Signing In");
 
-                    currentUser = authService.Login(username, password);
+                    currentUser = authService.Login(u, p);
 
                     if (currentUser != null)
                     {
                         SuccessMessage("Login Successful!");
+                        Thread.Sleep(1500);
 
-                        Thread.Sleep(2000); // يدخل تلقائي للصفحة الثانية
-
-                        UserMenu(
-                            currentUser,
+                        UserMenu(currentUser,
                             movieService,
                             searchService,
                             ratingService,
@@ -380,23 +451,18 @@ namespace MovieRecommendationSystem
                     else
                     {
                         ErrorMessage("Wrong Username or Password");
-
-                        Thread.Sleep(2000); // يرجع للمينيو الرئيسي
+                        Thread.Sleep(1500);
                     }
                 }
 
                 else if (choice == "3")
                 {
-                    Loading("Closing");
-                    CenterText("GOODBYE", ConsoleColor.Red);
-                    Console.ReadKey();
                     break;
                 }
 
                 else
                 {
                     ErrorMessage("Invalid Option");
-                    Console.WriteLine("\nPress any key...");
                     Console.ReadKey();
                 }
             }

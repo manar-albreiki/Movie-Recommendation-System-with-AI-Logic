@@ -17,91 +17,171 @@ namespace MovieRecommendationSystem.AI
         private string userFile = "Data/User.json";
 
         // =========================================
-        // Constructor
+        // CONSTRUCTOR
         // =========================================
         public RecommendationEngine()
         {
-            movies = FileManager.LoadData<Movie>(movieFile);
-            ratings = FileManager.LoadData<Rating>(ratingFile);
-            users = FileManager.LoadData<User>(userFile);
+            LoadData();
         }
 
         // =========================================
-        // MAIN AI RECOMMENDATION METHOD
+        // LOAD DATA
+        // =========================================
+        private void LoadData()
+        {
+            movies = FileManager.LoadData<Movie>(movieFile)
+                     ?? new List<Movie>();
+
+            ratings = FileManager.LoadData<Rating>(ratingFile)
+                      ?? new List<Rating>();
+
+            users = FileManager.LoadData<User>(userFile)
+                    ?? new List<User>();
+        }
+
+        // =========================================
+        // MAIN RECOMMENDATION SYSTEM
         // =========================================
         public List<Movie> GenerateRecommendations(User currentUser)
         {
-            // reload latest data
-            movies = FileManager.LoadData<Movie>(movieFile);
-            ratings = FileManager.LoadData<Rating>(ratingFile);
-            users = FileManager.LoadData<User>(userFile);
+            LoadData();
 
-            List<Movie> recommendedMovies = new List<Movie>();
+            List<MovieScore> scores =
+                new List<MovieScore>();
+
+            // =========================================
+            // USER RATINGS
+            // =========================================
+            var userRatings = ratings
+                .Where(r => r.UserId == currentUser.Id)
+                .ToList();
+
+            // =========================================
+            // USER FAVORITE GENRES
+            // =========================================
+            var favoriteGenres = userRatings
+                .Join(
+                    movies,
+                    rating => rating.MovieId,
+                    movie => movie.Id,
+                    (rating, movie) => new { rating, movie }
+                )
+                .Where(x => x.rating.Score >= 4)
+                .Select(x => x.movie.Genre)
+                .Distinct()
+                .ToList();
+
+            // =========================================
+            // USER FAVORITE MOVIES
+            // =========================================
+            var likedMovieIds = userRatings
+                .Where(r => r.Score >= 4)
+                .Select(r => r.MovieId)
+                .ToList();
 
             foreach (var movie in movies)
             {
-                double contentScore = CalculateContentScore(currentUser, movie);
-
-                double collaborativeScore =
-                    CalculateCollaborativeScore(currentUser, movie);
-
-                double finalScore =
-                    (contentScore * 0.6) +
-                    (collaborativeScore * 0.4);
-
-                // IMPORTANT FIX
-                movie.Rating = finalScore;
-
-                recommendedMovies.Add(movie);
-            }
-
-            return recommendedMovies
-                .OrderByDescending(m => m.Rating)
-                .Take(10)
-                .ToList();
-        }
-
-        // =========================================
-        // CONTENT-BASED FILTERING
-        // =========================================
-        private double CalculateContentScore(User user, Movie movie)
-        {
-            double score = 0;
-
-            if (user.FavoriteGenres != null)
-            {
-                foreach (var genre in user.FavoriteGenres)
+                // =========================================
+                // SKIP WATCHED MOVIES
+                // =========================================
+                if (currentUser.WatchHistory != null &&
+                    currentUser.WatchHistory.Contains(movie.Id))
                 {
-                    if (movie.Genre.ToLower()
-                        .Contains(genre.ToLower()))
+                    continue;
+                }
+
+                double score = 0;
+
+                // =========================================
+                // GENRE BONUS
+                // =========================================
+                if (favoriteGenres.Contains(movie.Genre))
+                {
+                    score += 5;
+                }
+
+                // =========================================
+                // TAG MATCH BONUS
+                // =========================================
+                foreach (var likedMovieId in likedMovieIds)
+                {
+                    var likedMovie = movies
+                        .FirstOrDefault(m => m.Id == likedMovieId);
+
+                    if (likedMovie == null)
+                        continue;
+
+                    if (movie.Tags != null &&
+                        likedMovie.Tags != null)
                     {
-                        score += 3;
+                        int commonTags =
+                            movie.Tags
+                            .Intersect(likedMovie.Tags)
+                            .Count();
+
+                        score += commonTags * 2;
                     }
                 }
+
+                // =========================================
+                // MOVIE GLOBAL RATING BONUS
+                // =========================================
+                var movieRatings = ratings
+                    .Where(r => r.MovieId == movie.Id)
+                    .ToList();
+
+                double averageRating = 0;
+
+                if (movieRatings.Count > 0)
+                {
+                    averageRating =
+                        movieRatings.Average(r => r.Score);
+
+                    score += averageRating;
+                }
+
+                // =========================================
+                // SAVE ACTUAL MOVIE RATING
+                // =========================================
+                movie.Rating =
+                    Math.Round(averageRating, 1);
+
+                // =========================================
+                // EXTRA BONUS FOR HIGH RATINGS
+                // =========================================
+                if (averageRating >= 4)
+                {
+                    score += 2;
+                }
+
+                // =========================================
+                // ADD RESULT
+                // =========================================
+                scores.Add(new MovieScore
+                {
+                    Movie = movie,
+                    Score = score
+                });
             }
 
-            return score;
-        }
-
-        // =========================================
-        // COLLABORATIVE FILTERING
-        // =========================================
-        private double CalculateCollaborativeScore(
-            User currentUser,
-            Movie movie)
-        {
-            double score = 0;
-
-            var movieRatings = ratings
-                .Where(r => r.MovieId == movie.Id)
+            // =========================================
+            // RETURN BEST MOVIES
+            // =========================================
+            return scores
+                .OrderByDescending(x => x.Score)
+                .Take(10)
+                .Select(x => x.Movie)
                 .ToList();
-
-            if (movieRatings.Count > 0)
-            {
-                score = movieRatings.Average(r => r.Score);
-            }
-
-            return score;
         }
+    }
+
+    // =========================================
+    // HELPER CLASS
+    // =========================================
+    public class MovieScore
+    {
+        public Movie Movie { get; set; }
+
+        public double Score { get; set; }
     }
 }
